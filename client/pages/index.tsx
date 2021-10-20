@@ -1,13 +1,15 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSidePropsContext } from 'next'
 import { useState } from 'react'
 
-import { withSessionSSR } from '../lib/withSession'
+import { NextIronRequest, withSessionSSR } from '../lib/withSession'
 
 import PageHead from '../components/PageHead'
 import LoginForm from '../components/LoginForm'
 import RegistrationForm from '../components/RegistrationForm'
 
-export const getServerSideProps = withSessionSSR(async function handler(context: any) {
+export const getServerSideProps = withSessionSSR(async function handler(
+  context: GetServerSidePropsContext & { req: NextIronRequest }
+) {
   const token = context.req.session.get('token')
 
   //   if (user === undefined) {

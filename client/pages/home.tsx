@@ -1,10 +1,11 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSidePropsContext } from 'next'
 
-import { withSessionSSR } from '../lib/withSession'
-
+import { NextIronRequest, withSessionSSR } from '../lib/withSession'
 import PageHead from '../components/PageHead'
 
-export const getServerSideProps = withSessionSSR(async function handler(context: any) {
+export const getServerSideProps = withSessionSSR(async function handler(
+  context: GetServerSidePropsContext & { req: NextIronRequest }
+) {
   const token = context.req.session.get('token')
 
   if (!token) {
