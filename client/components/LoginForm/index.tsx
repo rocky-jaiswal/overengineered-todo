@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
 
-import { createSession } from '../../lib/api/session'
+import { createSession } from '../../lib/api/sessions'
 import useAsync from '../../hooks/useAsync'
 
 interface Props {

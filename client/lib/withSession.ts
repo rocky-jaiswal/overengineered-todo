@@ -1,20 +1,27 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { Session, withIronSession } from 'next-iron-session'
-
-export type NextIronRequest = NextApiRequest & { session: Session }
-export type NextIronHandler = (req: NextIronRequest, res: NextApiResponse) => any | Promise<any>
+import { withIronSessionApiRoute, withIronSessionSsr } from 'iron-session/next'
+import { GetServerSidePropsContext, GetServerSidePropsResult, NextApiHandler } from 'next'
 
 // TODO: Use config
 const config = {
-  password: 'complex_password_at_least_32_characters_long',
-  cookieName: 'token',
+  password: 'J7aVfVo7UiMijzu4ZqkerygEuWAemrhe',
+  cookieName: 'token'
   // ttl: 3600,
-  // if your localhost is served on http:// then disable the secure flag
-  cookieOptions: {
-    secure: process.env.NODE_ENV === 'production'
-  }
 }
 
-export const withSessionAPI = (handler: NextIronHandler) => withIronSession(handler, config)
+export const withSessionAPI = (handler: NextApiHandler<any>) =>
+  withIronSessionApiRoute(handler, config)
 
-export const withSessionSSR = (context: any) => withIronSession(context, config)
+export const withSessionSsr = <P extends { [key: string]: unknown } = { [key: string]: unknown }>(
+  handler: (
+    context: GetServerSidePropsContext
+  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
+) => {
+  return withIronSessionSsr(handler, config)
+}
+
+// This is where we specify the typings of req.session.*
+declare module 'iron-session' {
+  export interface IronSessionData {
+    token?: string
+  }
+}

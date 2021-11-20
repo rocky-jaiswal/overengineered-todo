@@ -7,4 +7,4 @@
 3. Generate a strong secret/password somehow (e.g. https://1password.com/de/password-generator/)
 4. Run `node bin/lockSecret.js <environment>` to encrypt secrets, use secret/password here (uses GPG)
 5. Copy secret/password to .env
-6. Run `docker-compose up --build`
+6. Run `./run_dev.sh`

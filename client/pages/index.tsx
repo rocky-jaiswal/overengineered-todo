@@ -1,23 +1,16 @@
 import type { NextPage, GetServerSidePropsContext } from 'next'
 import { useState } from 'react'
 
-import { NextIronRequest, withSessionSSR } from '../lib/withSession'
+import { withSessionSsr } from '../lib/withSession'
 
 import PageHead from '../components/PageHead'
 import LoginForm from '../components/LoginForm'
 import RegistrationForm from '../components/RegistrationForm'
 
-export const getServerSideProps = withSessionSSR(async function handler(
-  context: GetServerSidePropsContext & { req: NextIronRequest }
+export const getServerSideProps = withSessionSsr(async function handler(
+  context: GetServerSidePropsContext
 ) {
-  const token = context.req.session.get('token')
-
-  //   if (user === undefined) {
-  //     res.setHeader('location', '/login')
-  //     res.statusCode = 302
-  //     res.end()
-  //     return { props: {} }
-  //   }
+  const token = context.req.session.token
 
   if (token) {
     return {
@@ -42,8 +35,8 @@ const Root: NextPage = () => {
 
       <main className="flex w-full">
         <div className="w-1/2 flex flex-col p-8">
-          <div>
-            <h1 className="text-4xl">Lorem ipsum dolor sit amet</h1>
+          <div className="p-4 bg-blue-900 text-white">
+            <h1 className="text-4xl">Welcome to Notation!</h1>
           </div>
         </div>
         <div className="w-1/2 flex flex-col bg-blue-200 p-8">

@@ -7,7 +7,7 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="app_container">
+    <div className="h-auto lg:h-screen flex flex-col">
       <Component {...pageProps} />
       <Footer />
     </div>

@@ -1,0 +1,19 @@
+"%dev":
+  quarkus:
+    log:
+      console:
+        format: "%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n"
+    datasource:
+      db-kind: postgresql
+      jdbc: false
+      username: ${DB_USER}
+      password: ${DB_PASSWORD}
+      reactive:
+        url: ${DB_URL}
+        max-size: 20
+
+"%test":
+  quarkus:
+    datasource:
+      db-kind: postgresql
+      jdbc: false
