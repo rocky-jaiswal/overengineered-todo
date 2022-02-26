@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 
 import db from '../repositories/db'
+import User from '../repositories/user'
 
 interface HasUserCredentials {
   email: string
@@ -13,11 +14,8 @@ const SALT_ROUNDS = 10
 const createUserInDB = async (params: HasUserCredentials) => {
   const encryptedPassword = await bcrypt.hash(params.password, SALT_ROUNDS)
 
-  await db('users').insert({ email: params.email, encrypted_password: encryptedPassword })
-
-  const id = await db('users').where({ email: params.email }).select('id').first()
-
-  params.userId = id as string
+  // TODO: DI for DB
+  params.userId = await new User(db).createUser(params.email, encryptedPassword)
 
   return params
 }

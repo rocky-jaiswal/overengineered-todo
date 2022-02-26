@@ -1,6 +1,7 @@
-import { pipeAsync } from '@rockyj/async-utils'
 import { FastifyReply, FastifyRequest } from 'fastify'
+import { pipeAsync } from '@rockyj/async-utils'
 
+import validateCreateUserRequest from '../../../actions/validateCreateUserRequest'
 import createUserInDB from '../../../actions/createUserInDB'
 import createToken from '../../../actions/createToken'
 
@@ -19,26 +20,15 @@ export class CreateUserState {
   }
 }
 
-const validateRequest = async (params: CreateUserState) => {
-  if (
-    !params.email.match(/@/) ||
-    params.password.length < 6 ||
-    params.password !== params.confirmedPassword
-  ) {
-    throw new Error('Bad user credentials provided!')
-  }
-
-  return params
-}
-
 const createUser = async (request: FastifyRequest, response: FastifyReply) => {
   try {
+    // TODO: What if body is undefined / null?
     const { email, password, confirmedPassword } = request.body as Record<string, string>
 
     const state = new CreateUserState(email, password, confirmedPassword)
 
     const updatedState = await pipeAsync<CreateUserState>(
-      validateRequest,
+      validateCreateUserRequest,
       createUserInDB,
       createToken
     )(state)

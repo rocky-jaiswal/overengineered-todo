@@ -1,4 +1,5 @@
 import db from '../repositories/db'
+import User from '../repositories/user'
 
 interface HasUserCredentials {
   email: string
@@ -8,11 +9,10 @@ interface HasUserCredentials {
 }
 
 const fetchUserFromDB = async (params: HasUserCredentials) => {
-  const obj = await db('users')
-    .where({ email: params.email })
-    .select(['id', 'encrypted_password'])
-    .first()
+  // TODO: DI for DB
+  const obj = await new User(db).findByEmail(params.email)
 
+  // TODO: This needs to be tested
   params.userId = obj.id as string
   params.encryptedPassword = obj.encrypted_password as string
 

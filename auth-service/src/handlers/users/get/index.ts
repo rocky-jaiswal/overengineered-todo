@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 
 const getUser = async (request: FastifyRequest, response: FastifyReply) => {
   try {
-    // Extract user id somehow from token header, and query db for email by user id
+    // TODO: Extract user id somehow from token header, and query db for email by user id
     response.send({})
   } catch (err) {
     request.log.error('Error in user fetch')

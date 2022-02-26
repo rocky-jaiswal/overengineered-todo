@@ -7,8 +7,8 @@ import getUser from '../handlers/users/get'
 
 const routing = (server: FastifyInstance, _opts: FastifyPluginOptions, done: Function) => {
   server.get('/ping', ping)
-  server.post('/sessions', createSession)
   server.post('/users', createUser)
+  server.post('/sessions', createSession)
   server.get('/users', getUser)
 
   done()

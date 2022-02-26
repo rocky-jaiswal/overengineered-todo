@@ -16,7 +16,7 @@
     "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "*": [
         "node_modules/*",

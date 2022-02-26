@@ -2,8 +2,8 @@ import { pipeAsync } from '@rockyj/async-utils'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
 import fetchUserFromDB from '../../../actions/fetchUserFromDB'
-import createToken from '../../../actions/createToken'
 import comparePasswords from '../../../actions/comparePasswords'
+import createToken from '../../../actions/createToken'
 
 export class CreateSessionState {
   public readonly email: string
@@ -20,6 +20,7 @@ export class CreateSessionState {
 }
 
 const validateRequest = async (params: CreateSessionState) => {
+  // TODO: Test me and move to a module
   if (!params.email || !params.password || !params.email.match(/@/) || params.password.length < 6) {
     throw new Error('Bad user credentials provided!')
   }
