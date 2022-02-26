@@ -2,6 +2,7 @@ import { Knex } from 'knex'
 
 class User {
   public static readonly TABLE_NAME = 'users'
+
   public readonly db: Knex
 
   constructor(db: Knex) {

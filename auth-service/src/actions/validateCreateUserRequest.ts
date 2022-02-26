@@ -1,4 +1,4 @@
-import { CreateUserState } from '../handlers/users/create'
+import CreateUserState from '../handlers/users/create/createUserState'
 
 // TODO: Test this
 const validateCreateUserRequest = async (params: CreateUserState) => {

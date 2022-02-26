@@ -7,6 +7,7 @@
     "create-migration": "NODE_ENV=development npx knex migrate:make",
     "migrate-latest": "npx knex migrate:latest",
     "clean": "rm -rf dist/ && mkdir dist",
+    "build": "yarn clean && yarn tsc",
     "lint": "yarn eslint 'src/**/*'",
     "watch-node": "NODE_ENV=development nodemon dist/index.js",
     "watch-ts": "tsc -w",
@@ -18,10 +19,8 @@
     "config": "^3.3.3",
     "fastify": "^3.12.0",
     "fastify-static": "^4.2.3",
-    "fp-ts": "^2.9.5",
     "js-yaml": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
-    "kleisli-ts": "^1.0.0",
     "knex": "^0.95.1",
     "pg": "^8.5.1",
     "uuid": "^8.3.2"
