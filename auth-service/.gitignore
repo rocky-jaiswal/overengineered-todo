@@ -1,5 +1,0 @@
-dist/
-node_modules/
-postgres/data/
-secrets/*.yaml
-.env
